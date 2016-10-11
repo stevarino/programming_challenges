@@ -7,6 +7,14 @@ Runs against an arbitrary size puzzle (can be rectangular) with arbitrarily
 sized cars (must be continous though). A car of length 1 is assumed to be 
 horizontal.
 
+The goal of this project was to create readable and maintainable code. This
+is largely inspired by Raymond Hettinger's Beyond PEP 8 talk (yay namedtuple):
+
+https://www.youtube.com/watch?v=wf-BqAjZb8M
+
+Ultimately I'm unsure if this is pythonic enough for my taste, but it works
+and is readable. 
+
 Easy UML:
     A Puzzle has many PuzzleStates.
     A Puzzle has one winner (PuzzleState)
