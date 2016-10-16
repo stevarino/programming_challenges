@@ -3,8 +3,8 @@
 from collections import deque, namedtuple
 from bisect import bisect_left
 
-problem_limit = 51e9
-problem_exp = ['thousand', 'million']
+problem_limit = 68e12
+problem_exp = ['thousand', 'million', 'billion']
 
 # Part of a word solution - used for lexigraphical tree and value conversion
 WordPart = namedtuple('WordPart', ['multiplier', 'value', 'branches'])
