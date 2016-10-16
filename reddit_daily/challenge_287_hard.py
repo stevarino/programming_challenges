@@ -3,8 +3,8 @@
 from collections import deque, namedtuple
 from bisect import bisect_left
 
-problem_limit = 68e12
-problem_exp = ['thousand', 'million', 'billion']
+problem_limit = 51e9
+problem_exp = ['thousand', 'million']
 
 # Part of a word solution - used for lexigraphical tree and value conversion
 WordPart = namedtuple('WordPart', ['multiplier', 'value', 'branches'])
@@ -105,6 +105,9 @@ class Shortcut(object):
         '''Skipping this branch, how many characters?'''
         return self.len + len(word.word) * self.size
 
+    def sum(self, word):
+        return self.size * (word.val + (self.size - 1) / 2)
+
 # Build our lexigraphical tree.
 words_ones = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
               'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
@@ -137,6 +140,7 @@ def solve(limit):
         words.insert(Word([word]))
     char_count = 0
     word_count = 0
+    total = 0
 
     shortcuts = [Shortcut("billion", 1e9), Shortcut("million", 1e6),
                  Shortcut("thousand", 1e3)]
@@ -148,21 +152,23 @@ def solve(limit):
         for shortcut in shortcuts:
             if shortcut.check(word, char_count, limit):
                 char_count += shortcut.jump(word)
+                total += shortcut.sum(word)
                 jumped = True
         if not jumped:
             char_count += len(word.word)
+            total += word.val
             for child in word.children():
                 words.insert(child)
         if char_count >= limit:
-            return char_count, word_count, word.val, word
+            return int(char_count), int(total), word.val, word
 
 if __name__ == '__main__':
     import time
     t = time.time()
-    c, i, v, w = solve(problem_limit)
+    c, s, v, w = solve(problem_limit)
     t = time.time() - t
     print("char: ", c)
-    print("cnt:  ", i)
+    print("sum:  ", s)
     print("val:  ", v)
     print("time: ", t)
     print("word: ", ' '.join(w.words))
