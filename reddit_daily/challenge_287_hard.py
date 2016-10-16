@@ -1,5 +1,47 @@
 # -*- coding: utf-8 -*-
 
+'''Reddit Daily Programmer Challenge #287 Hard
+
+Finds the 51e9 (or 68e12) characer in a generated string.
+
+Original problem description:
+
+    Consider the following procedure:
+        1. Take a list of the integers 1 through 999,999,999.
+        2. Write out each integer in English, so that you have 999,999,999
+           strings.
+        3. Sort the strings using alphabetical order.
+        4. Concatenate them all into one big string.
+        5. Take the first 51 billion (51,000,000,000) letters of this big
+           string.
+
+    Bonus:
+        Same procedure, except start with the integers 1 through
+        999,999,999,999 in step 1, and take the first 68 trillion
+        (68,000,000,000,000) letters in step 5. If I did it right (that's a big
+        "if"), this will also end on a number name boundary.
+
+Goals:
+    Speed.
+    Clean design.
+    Readability.
+
+Output:
+    ('char: ', 51000000000)
+    ('sum:  ', 413540008163490880)
+    ('val:  ', 676746575)
+    ('time: ', 0.05023193359375)
+    ('word: ', 'sixhundred seventy six million sevenhundred forty six thousand
+                fivehundred seventy five')
+
+    ('char: ', 68000000000000)
+    ('sum:  ', 403350794336290767634432L)
+    ('val:  ', 691403609393)
+    ('time: ', 0.09960794448852539)
+    ('word: ', 'sixhundred ninety one billion fourhundred three million
+                sixhundred nine thousand threehundred ninety three')
+"""
+
 from collections import deque, namedtuple
 from bisect import bisect_left
 
@@ -34,6 +76,7 @@ class sorted_deque(object):
         self.__deque.rotate(-index)
         self.__deque.appendleft(obj)
         self.__deque.rotate(index)
+'''
 
 
 class Word(object):
